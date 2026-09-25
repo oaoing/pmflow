@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: pmflow
+  jpa:
+    hibernate.ddl-auto: none        # ADR-0004
+    open-in-view: false
+  flyway:
+    enabled: true
+    locations:
+      - classpath:db/migration
+management:
+  endpoints.web.exposure.include: health, info, prometheus
+springdoc:
+  swagger-ui.path: /swagger-ui.html
