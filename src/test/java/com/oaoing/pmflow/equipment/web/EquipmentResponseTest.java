@@ -13,7 +13,7 @@ public class EquipmentResponseTest {
     @Test
     @DisplayName("Equipment의 모든 필드가 응답으로 복사된다")
     void maps_all_fields() {
-        // given: 테스트에 쓸 입력을 준비한다
+        // given
         Equipment equipment = new Equipment();
         equipment.setCode("EQ-001");
         equipment.setName("공조기 1호");
@@ -21,10 +21,10 @@ public class EquipmentResponseTest {
         equipment.setUnit(Unit.MONTH);
         equipment.setDescription("3층 기계실");
 
-        // when: 테스트 대상을 딱 한 번 호출한다
+        // when
         EquipmentResponse response = EquipmentResponse.from(equipment);
 
-        // then: 결과가 기대와 같은지 확인한다
+        // then
         assertThat(response.code()).isEqualTo("EQ-001");
         assertThat(response.name()).isEqualTo("공조기 1호");
         assertThat(response.period()).isEqualTo(3);
@@ -37,14 +37,14 @@ public class EquipmentResponseTest {
     @DisplayName("Unit은 name과 label로 나뉘어 응답에 담긴다")
     @EnumSource(value = Unit.class)
     void unit_is_exposed_as_name_and_label(Unit unit) {
-        // given: 테스트에 쓸 입력을 준비한다
+        // given
         Equipment equipment = new Equipment();
         equipment.setUnit(unit);
 
-        // when: 테스트 대상을 딱 한 번 호출한다
+        // when
         EquipmentResponse response = EquipmentResponse.from(equipment);
 
-        // then: 결과가 기대와 같은지 확인한다
+        // then
         assertThat(response.unit()).isEqualTo(unit.name());
         assertThat(response.unitLabel()).isEqualTo(unit.getLabel());
     }
@@ -52,16 +52,16 @@ public class EquipmentResponseTest {
     @Test
     @DisplayName("name, description이 null이어도 예외 없이 null로 매핑")
     void nullable_fields() {
-        // given: 테스트에 쓸 입력을 준비한다
+        // given
         Equipment equipment = new Equipment();
         equipment.setCode("EQ-001");
         equipment.setPeriod(3);
         equipment.setUnit(Unit.MONTH);
 
-        // when: 테스트 대상을 딱 한 번 호출한다
+        // when
         EquipmentResponse response = EquipmentResponse.from(equipment);
 
-        // then: 결과가 기대와 같은지 확인한다
+        // then
         assertThat(response.code()).isEqualTo("EQ-001");
         assertThat(response.name()).isNull();
         assertThat(response.period()).isEqualTo(3);
